@@ -1,6 +1,6 @@
 name: GitHub Actions Lint
 
-on: pull_request
+on: [pull_request]
 
 jobs:
   build:
