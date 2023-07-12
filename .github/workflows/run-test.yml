@@ -1,4 +1,4 @@
-name: GitHub Actions Tests
+name: GitHub Actions Tests Run
 
 on: [pull_request]
 
