@@ -8,4 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci
+      - name: Run Jest Unit tests
       - run: npm test
