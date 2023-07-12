@@ -1,6 +1,6 @@
 name: GitHub Actions Tests
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   unit-tests:
@@ -8,5 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci
-      - name: Run Jest Unit tests
       - run: npm test
