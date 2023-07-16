@@ -9810,9 +9810,13 @@ const createIssue = async () => {
     });
 
     const changelog = core.getInput("changelog", { required: false }) || "";
+    const changelogCI = core.getInput("changelog-ci", { required: false }) || "";
 
     const formattedChangelog = changelog ? `## Changelog
-${changelog.replaceAll('%OA', '\n')}
+${changelog}
+
+
+${changelogCI.replaceAll('%OA', '\n')}
     ` : "";
 
     const issueBody = `# Релиз ${tagName}

@@ -116,6 +116,13 @@ jobs:
         with:
           config_file: changelog-ci-config.json
           release_version: "${{  github.ref_name }}"
+      - name: create changelog
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
+          writeToFile: false
       - name: "Create Issue"
         uses: ./.github/workflows/createIssue
         with: 
@@ -125,4 +132,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.event.ref }}
           tag_name: ${{ github.ref_name }}
-          changelog: ${{ steps.changelog-ci.outputs.changelog }}
+          changelog-ci: ${{ steps.changelog-ci.outputs.changelog }}
+          changelog: ${{ steps.changelog.outputs.changes }}
+
