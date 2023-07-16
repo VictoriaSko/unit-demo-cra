@@ -113,7 +113,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: "Create Issue"
-        uses: ./.github/workflow/createIssue
+        uses: ./.github/workflows/createIssue
         with: 
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
