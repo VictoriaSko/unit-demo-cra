@@ -23,6 +23,7 @@ git commit -m "chore: lint on commitmsg"
 ```
 
 **Проверка форматирования коммитов, реализованная с помощью GitHub Actions:**<br/>
+
 Для проверки был добавлен файл `.github/workflows/commit-lint.yml`. При пуше коммита запускается задача `commitlint`, которая делает следующее:
 1. Настраивает окружение, в котором будет происходить проверка
 2. Проверяется сообщение коммита
@@ -36,7 +37,8 @@ git commit -m "chore: lint on commitmsg"
 
 ## Задание 2
 
-В GitHub Actions были реализованы задачи для запуска unit и e2e тестов, а так же запуск eslint проверки, при пуше коммита в пул реквест
+В GitHub Actions были реализованы задачи для запуска unit и e2e тестов, а так же запуск eslint проверки, при пуше коммита в пул реквест <br>
+
 В разделе Pull requests можно посмотреть пример [успешных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/5) и [проваленных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/6)
 
 Описание работы задач:
@@ -50,7 +52,12 @@ git commit -m "chore: lint on commitmsg"
 
 ## Задание 3
 
-Процесс реализа проходит следующие этапы:
+Пример процесса релиза можно посмотреть на основе обновления v26 (ниже версии v26 были тестовые релизы, необходимые для выполнения задачи, их результаты смотреть не стоит):<br>
+* [Релиз v26](https://github.com/VictoriaSko/unit-demo-cra/releases/tag/v26)
+* [Workflow релиза v26](https://github.com/VictoriaSko/unit-demo-cra/actions/runs/5569427009)
+* [Issue релиза v26](https://github.com/VictoriaSko/unit-demo-cra/issues/36)
+
+Процесс релиза проходит следующие этапы:
 1. В ветку main отправляется новый тег
 ```sh
 # Создание локально нового тега
