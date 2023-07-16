@@ -61,11 +61,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Changelog CI
+        uses: saadmk11/changelog-ci@v1.1.1
+        id: changelog-ci
+        with:
+          config_file: changelog-ci-config.json
+      - name: Get Changelog Output
+        run: |
+          echo "${{ steps.changelog-ci.outputs.changelog }}"
+          echo "${{ steps.changelog-ci.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -76,6 +80,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
-            ${{steps.github_release.outputs.changelog}}
+            ${{steps.changelog-ci.outputs.changelog}}
           draft: false
           prerelease: false
