@@ -1,5 +1,4 @@
 {
     "version_regex": "v[0-9]+",
-    "commit_changelog": false,
     "changelog_type": "commit_message"
 }
