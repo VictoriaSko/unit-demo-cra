@@ -21,7 +21,7 @@ inputs:
     required: true
   changelog:
     description: 'ChangeLog'
-    required: true
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'
