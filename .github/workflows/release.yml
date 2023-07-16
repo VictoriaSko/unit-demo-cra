@@ -5,6 +5,10 @@ on:
     tags:
       - 'v[0-9]+'
 
+defaults:
+  run:
+    working-directory: .
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -108,7 +112,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: "Create Issue"
-        uses: ./helpers/createIssue
+        uses: ./.github/workflow/helpers/createIssue
         with: 
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
