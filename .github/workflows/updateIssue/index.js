@@ -31,7 +31,7 @@ ${testObject["unit-tests"].result === "success" ? "Прогон Jest тесто�
 ## Запуск Playwright тестов:
 ${testObject["e2e-tests"].result === "success" ? "Прогон Playwright тестов завершился успешно" : "Прогон Playwright тестов завершился с ошибкой"}
 
-(Ссылка на результат)[${testsResultUrl}]`;
+[Ссылка на результат](${testsResultUrl})`;
 
         await octokit.rest.issues.createComment({ owner, repo, issue_number: issueNumber, body: commentBody });
     }
@@ -41,7 +41,7 @@ ${testObject["e2e-tests"].result === "success" ? "Прогон Playwright тес
         const commentBody = `# Результат деплоя
 ${deployObject.deploy.result === "success" ? "Деплой завершился успешно" : "Деплой завершился с ошибкой"}
 
-(Ссылка на результат)[${deployResultUrl}]`;
+[Ссылка на результат](${deployResultUrl})`;
 
         await octokit.rest.issues.createComment({ owner, repo, issue_number: issueNumber, body: commentBody });
         await octokit.rest.issues.update({owner, repo, issue_number: issueNumber, state: "closed"});
