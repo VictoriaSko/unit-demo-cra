@@ -22,7 +22,7 @@ ${changelog.replaceAll('%OA', '\n')}
     ` : "";
 
     const issueBody = `# Релиз ${tagName}
-Дата релиза: ${release.created_at}
+Дата релиза: ${release.data}
 Автор релиза: ${actor}
 Версия релиза: ${tagName}
 
