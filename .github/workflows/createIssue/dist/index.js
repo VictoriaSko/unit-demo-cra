@@ -9798,12 +9798,18 @@ const github = __nccwpck_require__(5438);
 const createIssue = async () => {
     const octokit = github.getOctokit(core.getInput("github_token", { required: true }));
 
-    const changelog = core.getInput("changelog", { required: false });
+    const changelog = core.getInput("changelog", { required: false }) || "";
+
+    const formattedChangelog = changelog ? `## Changelog
+
+${changelog.replace('%OA', '\n')}
+    ` : "";
 
     const issueBody = `# Test body
-    Test text <br>
+Test text
 
-    ${changelog.replace('%OA', '\n')}`;
+${formattedChangelog}
+`;
 
     await octokit.rest.issues.create({
         owner: core.getInput("owner", { required: true }),
