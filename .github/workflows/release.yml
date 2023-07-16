@@ -69,27 +69,20 @@ jobs:
           release_version: "${{  github.ref_name }}"
       - name: Replace substring
         uses: mad9000/actions-find-and-replace-string@3
-        # id: changelog_double
         id: changelog_replace1
         with:
           source: ${{ steps.changelog-ci.outputs.changelog }}
           find: '%0A'
-          replace: '\n'
+          replace: '<br>'
           replaceAll: 'true'
-      # - name: Replace substring
-      #   uses: mad9000/actions-find-and-replace-string@3
-      #   id: changelog_single
-      #   with:
-      #     source: ${{ steps.changelog_double.outputs.value }}
-      #     find: '%0A'
-      #     replaceAll: '\n '
       - name: Replace substring
         uses: mad9000/actions-find-and-replace-string@3
         id: changelog
         with:
           source: ${{ steps.changelog_replace1.outputs.value }}
           find: '*'
-          replaceAll: ' * '
+          replace: ' * '
+          replaceAll: 'true'
       - name: Get Changelog Output
         id: get_changelog_output
         run: |
