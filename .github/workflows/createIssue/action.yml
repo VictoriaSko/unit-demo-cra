@@ -22,9 +22,6 @@ inputs:
   changelog:
     description: 'ChangeLog'
     required: false
-  changelog-ci:
-    description: 'ChangeLog with CI'
-    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'

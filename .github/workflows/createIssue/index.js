@@ -16,17 +16,13 @@ const createIssue = async () => {
     });
 
     const changelog = core.getInput("changelog", { required: false }) || "";
-    const changelogCI = core.getInput("changelog-ci", { required: false }) || "";
 
     const formattedChangelog = changelog ? `## Changelog
 ${changelog}
-
-
-${changelogCI.replaceAll('%OA', '\n')}
-    ` : "";
+` : "";
 
     const issueBody = `# Релиз ${tagName}
-Дата релиза: ${release.data}
+Дата релиза: ${release.data.created_at}
 Автор релиза: ${actor}
 Версия релиза: ${tagName}
 
