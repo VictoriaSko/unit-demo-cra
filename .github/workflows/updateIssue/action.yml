@@ -22,6 +22,12 @@ inputs:
   tests_result_url:
     description: 'Url on result of lint, unit and e2e tests'
     required: false
+  deploy_result:
+    description: 'Result of deploy'
+    required: false
+  deploy_result_url:
+    description: 'Url on result of deploy'
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'

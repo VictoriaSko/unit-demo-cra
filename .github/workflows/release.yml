@@ -149,4 +149,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+  deploy-result:
+    name: Add Deploy Result To Issues
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Update Issue
+        uses: ./.github/workflows/updateIssue
+        with: 
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.ref }}
+          tag_name: ${{ github.ref_name }}
+          deploy_result: ${{ toJson(needs) }}
+          deploy_result_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
