@@ -9809,6 +9809,12 @@ const createIssue = async () => {
         tag: tagName,
     });
 
+    await octokit.rest.repos.generateReleaseNotes({
+        owner,
+        repo,
+        tag_name: tagName,
+    });
+
     const changelog = core.getInput("changelog", { required: false }) || "";
 
     const formattedChangelog = changelog ? `## Changelog
