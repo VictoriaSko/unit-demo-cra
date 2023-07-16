@@ -121,7 +121,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 
-          ref: master
+          ref: main
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
@@ -137,9 +137,7 @@ jobs:
           retention-days: "90"
   deploy:
     needs: [build]
-    permissions:
-      pages: write
-      id-token: write
+    permissions: write-all
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
