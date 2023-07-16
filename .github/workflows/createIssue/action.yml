@@ -1,6 +1,9 @@
 name: 'Create Issue'
 description: 'Create Issue'
 inputs:
+  actor:
+    description: 'Actor'
+    required: true
   owner:
     description: 'Owner'
     required: true
@@ -15,6 +18,9 @@ inputs:
     required: true
   tag_name:
     description: 'Tag Name'
+    required: true
+  changelog:
+    description: 'ChangeLog'
     required: true
 runs:
   using: 'node16'
