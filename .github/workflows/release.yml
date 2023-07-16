@@ -109,13 +109,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.event.ref }}
           tag_name: ${{ github.ref_name }}
-          testsResult: ${{ toJson(needs) }}
-      - name: Check results
-        run: |
-          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
-          echo ${{ github.repository_owner }}
-          echo ${{ toJson(needs) }}
+          tests_result: ${{ toJson(needs) }}
+          tests_result_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
   build:
     name: Build
     runs-on: ubuntu-latest

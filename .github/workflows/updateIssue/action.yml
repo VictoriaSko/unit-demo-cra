@@ -16,8 +16,11 @@ inputs:
   tag_name:
     description: 'Tag Name'
     required: true
-  testsResult:
-    description: 'Result og lint, unit and e2e tests'
+  tests_result:
+    description: 'Result of lint, unit and e2e tests'
+    required: false
+  tests_result_url:
+    description: 'Url on result of lint, unit and e2e tests'
     required: false
 runs:
   using: 'node16'
