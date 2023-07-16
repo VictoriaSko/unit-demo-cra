@@ -70,9 +70,9 @@ jobs:
       - name: Get Changelog Output
         id: get_changelog_output
         env:
-          BAD_CHANGELOG: '${{ steps.changelog-ci.outputs.changelog }}'
+          BAD_CHANGELOG: ${{ steps.changelog-ci.outputs.changelog }}
         run: |
-          CHANGELOG=${echo $BAD_CHANGELOG | sed 's/%0A/\n/g'}
+          CHANGELOG=${echo $"BAD_CHANGELOG" | python -c 'for l in __import__("fileinput").input():print l.replace("%0A","\n")'}
           echo "$CHANGELOG"
           echo "$CHANGELOG" >> $GITHUB_STEP_SUMMARY
           echo "changelog=$CHANGELOG" >> $GUTHUB_OUTPUTS
