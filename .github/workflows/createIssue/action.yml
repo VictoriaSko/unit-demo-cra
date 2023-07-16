@@ -1,0 +1,21 @@
+name: 'Create Issue'
+description: 'Create Issue'
+inputs:
+  owner:
+    description: 'Owner'
+    required: true
+  repo:
+    description: 'Repository'
+    required: true
+  github_token:
+    description: 'Github Token'
+    required: true
+  ref:
+    description: 'Ref'
+    required: true
+  tag_name:
+    description: 'Tag Name'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

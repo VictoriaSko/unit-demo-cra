@@ -10,22 +10,6 @@ defaults:
     working-directory: .
 
 jobs:
-  create-issue:
-    name: Create Issue
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: "Create Issue"
-        uses: ./.github/workflow/helpers/createIssue
-        with: 
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.event.ref }}
-          tag_name: ${{ github.ref }}
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -120,3 +104,19 @@ jobs:
           body: '${{env.BODY}}'
           draft: false
           prerelease: false
+  create-issue:
+    name: Create Issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: "Create Issue"
+        uses: ./.github/workflow/createIssue
+        with: 
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.ref }}
+          tag_name: ${{ github.ref }}
