@@ -92,9 +92,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CHANGELOG: ${{ steps.get_changelog_output.outputs.changelog }}
+          BODY: $'Changes in this Release\n ${{ steps.changelog.outputs.value }}'
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: $'Changes in this Release ${{ steps.changelog.outputs.value }}'
+          body: "$STR"
           draft: false
           prerelease: false
