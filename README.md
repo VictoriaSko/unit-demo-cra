@@ -29,17 +29,15 @@ git commit -m "chore: lint on commitmsg"
 2. Проверяется сообщение коммита
 3. Если проверка не проходит - задача падает
 
-В разделе Actions репозитория можно посмотреть [успешные задачи]() для правильного сообщения коммита и [проваленные задачи]()
+В разделе Actions репозитория можно посмотреть [успешные задачи](https://github.com/VictoriaSko/unit-demo-cra/actions/runs/5569473402) для правильного сообщения коммита и [проваленные задачи](https://github.com/VictoriaSko/unit-demo-cra/actions/runs/5569479726)
 
 - [.yml файл для проверки форматирования коммитов](https://github.com/VictoriaSko/unit-demo-cra/blob/main/.github/workflows/commit-lint.yml)
-
--------------
 
 ## Задание 2
 
 В GitHub Actions были реализованы задачи для запуска unit и e2e тестов, а так же запуск eslint проверки, при пуше коммита в пул реквест <br>
 
-В разделе Pull requests можно посмотреть пример [успешных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/5) и [проваленных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/6)
+В разделе Pull requests можно посмотреть пример [успешных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/37) и [проваленных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/38)
 
 Описание работы задач:
 1. Устанавливаются зависимости и настраивается окружение, на котором будет проводится проверка
@@ -47,8 +45,6 @@ git commit -m "chore: lint on commitmsg"
 3. Если проверка не проходит (в случае тестов, если хотя бы один из тестов завершается с ошибкой) - задача падает
 
 - [.yml файл для eslint проверки, для unit тестов, для e2e тестов](https://github.com/VictoriaSko/unit-demo-cra/blob/main/.github/workflows/pr-checks.yml)
-
--------------
 
 ## Задание 3
 
