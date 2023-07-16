@@ -33,8 +33,6 @@ git commit -m "chore: lint on commitmsg"
 
 - [.yml файл для проверки форматирования коммитов](https://github.com/VictoriaSko/unit-demo-cra/blob/main/.github/workflows/commit-lint.yml)
 
--------------
-
 ## Задание 2
 
 В GitHub Actions были реализованы задачи для запуска unit и e2e тестов, а так же запуск eslint проверки, при пуше коммита в пул реквест <br>
@@ -47,8 +45,6 @@ git commit -m "chore: lint on commitmsg"
 3. Если проверка не проходит (в случае тестов, если хотя бы один из тестов завершается с ошибкой) - задача падает
 
 - [.yml файл для eslint проверки, для unit тестов, для e2e тестов](https://github.com/VictoriaSko/unit-demo-cra/blob/main/.github/workflows/pr-checks.yml)
-
--------------
 
 ## Задание 3
 
