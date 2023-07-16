@@ -59,47 +59,18 @@ jobs:
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
           echo ${{ github.repository_owner }}
           echo ${{ toJson(needs) }}
-  create-issue:
-    name: Create Issue
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Run Changelog CI
-        uses: saadmk11/changelog-ci@v1.1.1
-        id: changelog-ci
-        with:
-          config_file: changelog-ci-config.json
-          release_version: "${{  github.ref_name }}"
-      - name: Get Changelog Output
-        id: get_changelog_output
-        run: |
-          echo "${{ steps.changelog-ci.outputs.changelog }}"
-          echo "${{ steps.changelog-ci.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
-      - name: "Create Issue"
-        uses: ./.github/workflows/createIssue
-        with: 
-          owner: ${{ github.repository_owner }}
-          actor: ${{ github.actor }}
-          repo: ${{ github.event.repository.name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.event.ref }}
-          tag_name: ${{ github.ref_name }}
-          changelog: ${{ steps.changelog-ci.outputs.changelog }}
   create-release:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run Changelog CI
-        uses: saadmk11/changelog-ci@v1.1.1
-        id: changelog-ci
-        with:
-          config_file: changelog-ci-config.json
-          release_version: "${{  github.ref_name }}"
+      # - name: Run Changelog CI
+      #   uses: saadmk11/changelog-ci@v1.1.1
+      #   id: changelog-ci
+      #   with:
+      #     config_file: changelog-ci-config.json
+      #     release_version: "${{  github.ref_name }}"
       # - name: Replace substring
       #   uses: mad9000/actions-find-and-replace-string@3
       #   id: changelog_replace1
@@ -131,3 +102,27 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
+  create-issue:
+    name: Create Issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run Changelog CI
+        uses: saadmk11/changelog-ci@v1.1.1
+        id: changelog-ci
+        with:
+          config_file: changelog-ci-config.json
+          release_version: "${{  github.ref_name }}"
+      - name: "Create Issue"
+        uses: ./.github/workflows/createIssue
+        with: 
+          owner: ${{ github.repository_owner }}
+          actor: ${{ github.actor }}
+          repo: ${{ github.event.repository.name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.ref }}
+          tag_name: ${{ github.ref_name }}
+          changelog: ${{ steps.changelog-ci.outputs.changelog }}
