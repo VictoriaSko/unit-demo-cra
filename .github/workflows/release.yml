@@ -66,6 +66,7 @@ jobs:
         id: changelog-ci
         with:
           config_file: changelog-ci-config.json
+          release_version: "${{  github.ref_name }}"
       - name: Get Changelog Output
         run: |
           echo "${{ steps.changelog-ci.outputs.changelog }}"
