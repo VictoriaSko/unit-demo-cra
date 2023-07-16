@@ -110,8 +110,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Run Changelog CI
         uses: saadmk11/changelog-ci@v1.1.1
         id: changelog-ci
