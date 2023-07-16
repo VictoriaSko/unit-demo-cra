@@ -68,8 +68,10 @@ jobs:
           config_file: changelog-ci-config.json
           release_version: "${{  github.ref_name }}"
       - name: Get Changelog Output
+        env:
+          changelog: '${{ steps.changelog-ci.outputs.changelog }}'
         run: |
-          CHANGELOG=${echo "${{ steps.changelog-ci.outputs.changelog }}" | tr '%0A' '\n'}
+          $CHANGELOG=$ENV:changelog.replace('%0A','\n')
           echo "$CHANGELOG"
           echo "$CHANGELOG" >> $GITHUB_STEP_SUMMARY
       - name: Create Release
@@ -77,11 +79,12 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          changelog: '${{ steps.changelog-ci.outputs.changelog }}'
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
-            ${{steps.changelog-ci.outputs.changelog}}
+            ${$ENV:changelog.replace('%0A','\n')}
           draft: false
           prerelease: false
