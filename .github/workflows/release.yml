@@ -100,3 +100,18 @@ jobs:
           body: '${{env.BODY}}'
           draft: false
           prerelease: false
+  create-issue:
+    name: Create Issue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: "Create Issue"
+        uses: ./helpers/createIssue
+        with: 
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.ref }}
+          tag_name: ${{ github.ref }}
