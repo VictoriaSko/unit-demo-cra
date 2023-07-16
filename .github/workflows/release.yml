@@ -69,8 +69,9 @@ jobs:
           release_version: "${{  github.ref_name }}"
       - name: Get Changelog Output
         run: |
-          echo "${{ steps.changelog-ci.outputs.changelog }}"
-          echo "${{ steps.changelog-ci.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
+          CHANGELOG = echo "${{ steps.changelog-ci.outputs.changelog }}" | tr '%0A' '\n'
+          echo "$CHANGELOG"
+          echo "$CHANGELOG" >> $GITHUB_STEP_SUMMARY
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
