@@ -53,7 +53,6 @@ git commit -m "chore: lint on commitmsg"
 ## Задание 3
 
 Пример процесса релиза можно посмотреть на основе обновления v26 (ниже версии v26 были тестовые релизы, необходимые для выполнения задачи, их результаты смотреть не стоит):<br>
-* [Релиз v26](https://github.com/VictoriaSko/unit-demo-cra/releases/tag/v26)
 * [Workflow релиза v26](https://github.com/VictoriaSko/unit-demo-cra/actions/runs/5569427009)
 * [Issue релиза v26](https://github.com/VictoriaSko/unit-demo-cra/issues/36)
 
