@@ -30,6 +30,8 @@ git commit -m "chore: lint on commitmsg"
 
 В разделе Actions репозитория можно посмотреть [успешные задачи]() для правильного сообщения коммита и [проваленные задачи]()
 
+- [.yml файл для проверки форматирования коммитов](https://github.com/VictoriaSko/unit-demo-cra/blob/main/.github/workflows/commit-lint.yml)
+
 -------------
 
 ## Задание 2
@@ -37,59 +39,60 @@ git commit -m "chore: lint on commitmsg"
 В GitHub Actions были реализованы задачи для запуска unit и e2e тестов, а так же запуск eslint проверки, при пуше коммита в пул реквест
 В разделе Pull requests можно посмотреть пример [успешных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/5) и [проваленных запусков тестов](https://github.com/VictoriaSko/unit-demo-cra/pull/6)
 
-- [.yml файл для unit тестов](https://github.com/VictoriaSko/unit-demo-cra/blob/master/.github/workflows/unit-test.yml)
-
-- [.yml файл для e2e тестов](https://github.com/VictoriaSko/unit-demo-cra/blob/master/.github/workflows/test.yml)
-
-- [.yml файл для eslint проверки](https://github.com/VictoriaSko/unit-demo-cra/blob/master/.github/workflows/lint.yml)
-
 Описание работы задач:
 1. Устанавливаются зависимости и настраивается окружение, на котором будет проводится проверка
 2. Запускается соответствующий (test, e2e, lint) npm скрипт, прописанный в package.json
 3. Если проверка не проходит (в случае тестов, если хотя бы один из тестов завершается с ошибкой) - задача падает
 
+- [.yml файл для eslint проверки, для unit тестов, для e2e тестов](https://github.com/VictoriaSko/unit-demo-cra/blob/main/.github/workflows/pr-checks.yml)
+
 -------------
 
 ## Задание 3
 
-Changes in this Release
-
-# Version: v4 
-* [fa23334](https://github.com/VictoriaSko/unit-demo-cra/commit/fa23334fc33fab8900e1d670f12ce6fb6968c0c8): test
-* [efb92f4](https://github.com/VictoriaSko/unit-demo-cra/commit/efb92f4d3052d08bb09a956c993274ecd521429f): test
-* [fc961fd](https://github.com/VictoriaSko/unit-demo-cra/commit/fc961fdc6eb15837a8c7bde3cd20d27ec63a0e55): test
-
--------------
-
-В этом репозитории находится пример приложения с тестами:
-
-- [e2e тесты](e2e/example.spec.ts)
-- [unit тесты](src/example.test.tsx)
-
-Для запуска примеров необходимо установить [NodeJS](https://nodejs.org/en/download/) 16 или выше.
-
-Как запустить:
-
+Процесс реализа проходит следующие этапы:
+1. В ветку main отправляется новый тег
 ```sh
-# установить зависимости
-npm ci
+# Создание локально нового тега
+git tag -a v1 -m 'release v1' 
 
-# запустить приложение
-npm start
+# Загрузка созданного локально тега в репозиторий
+git push origin v1
 ```
 
-Как запустить e2e тесты:
+2. После загрузки нового тега, соответствующего маске v<число>, в репозиторий, запускается воркфлоу, описанный в файле `./workflows/release.yml` (`on push tags`)
+
+3. Для начала запускается создание релиза (`create-release job`)
+
+4. Создается issue (`create-issue job`)
+    - В issue записывается changelog, который представляет из себя список коммитов, запушенных между предыдущей версией тега и текущей
+    - Записывается основная информация о релизе (автор, время создания, версия)
+
+5. Запускается проверка Eslint (`lint job`)
+
+6. Запускаются unit и e2e тесты (`unit-tests job и e2e-tests job`)
+
+7. Производится обработка результатов проверки и тестов. Результат записывается в комментарии открытого issue, с указанием ссылки на workflow, в котором производилась проверка, где можно детальнее посмотреть результат проверок (`tests-result job`)
+
+8. Выполнение задач останавливается и продолжится только после подтверждения пользователя.
+
+9. Далее запускается сборка проекта (`build job`)
+
+10. После завершения сборки запускается деплой сайта на github-pages. В случае успешного завершения задачи, проект будет доступен по адресу https://victoriasko.github.io/unit-demo-cra (`deploy job`)
+
+11. После завершения завершения деплоя, запускается обработка результатов, которые добавляются в комментарии открытого issue. Если деплой завершился успешно - issue закрывается (`deploy-result`)
+
+В релизном флоу задачи взаимосвязаны, то есть некоторые задачи ожидают завершения других перед началом. Получается следующая взаимосвязь:
 
 ```sh
-# скачать браузеры
-npx playwright install
-
-# запустить тесты
-npm run e2e
+create-release -> 
+create-issue -> 
+lint, unit-tests, e2e-tests -> 
+tests-result -> 
+ожидание подтверждения запуска -> 
+build -> 
+deploy -> 
+deploy-result
 ```
 
-Как запустить модульные тесты:
-
-```sh
-npm test
-```
+- [.yml файл для реализации процесса релиза](https://github.com/VictoriaSko/unit-demo-cra/blob/main/.github/workflows/release.yml)
