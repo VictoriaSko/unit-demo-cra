@@ -12,7 +12,7 @@ const createIssue = async () => {
     const release = await octokit.rest.repos.getReleaseByTag({
         owner,
         repo,
-        tagName,
+        tag: tagName,
     });
 
     const changelog = core.getInput("changelog", { required: false }) || "";
