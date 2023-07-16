@@ -69,11 +69,18 @@ jobs:
           release_version: "${{  github.ref_name }}"
       - name: Replace substring
         uses: mad9000/actions-find-and-replace-string@3
-        id: changelog
+        id: changelog_double
         with:
           source: ${{ steps.changelog-ci.outputs.changelog }}
+          find: '%0A%0A'
+          replaceAll: ' \ '
+      - name: Replace substring
+        uses: mad9000/actions-find-and-replace-string@3
+        id: changelog
+        with:
+          source: ${{ steps.changelog_double.outputs.value }}
           find: '%0A'
-          replaceAll: '\ '
+          replaceAll: ' \ '
       - name: Get Changelog Output
         id: get_changelog_output
         run: |
@@ -90,8 +97,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
-            "${{ steps.changelog.outputs.value }}"
-            "${ steps.changelog.outputs.value }"
-            ${ steps.changelog.outputs.value }
+            ${{ steps.changelog.outputs.value }}
           draft: false
           prerelease: false
