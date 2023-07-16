@@ -51,5 +51,7 @@ jobs:
           fetch-depth: 0
       - name: Check results
         run: |
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
           echo ${{ github.repository_owner }}
           echo ${{ toJson(needs) }}
