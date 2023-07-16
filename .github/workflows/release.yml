@@ -73,7 +73,7 @@ jobs:
         with:
           source: ${{ steps.changelog-ci.outputs.changelog }}
           find: '%0A'
-          replace: '\n'
+          replaceAll: '<br>'
       - name: Get Changelog Output
         id: get_changelog_output
         run: |
