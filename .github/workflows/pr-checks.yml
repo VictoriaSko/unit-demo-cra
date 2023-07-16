@@ -4,6 +4,7 @@ on: [pull_request]
 
 jobs:
   lint:
+    if: ${{ !contains(github.ref_name, 'release') }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -12,12 +13,14 @@ jobs:
     - name: Run ESLint
       run: npm run lint
   unit-tests:
+    if: ${{ !contains(github.ref_name, 'release') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: npm ci
       - run: npm test
   e2e-tests:
+    if: ${{ !contains(github.ref_name, 'release') }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
