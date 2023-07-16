@@ -43,8 +43,12 @@ jobs:
   jobs-result:
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    needs: [lint, unit_tests, e2e_tests]
+    needs: [lint, unit-tests, e2e-tests]
     steps:
-      run: |
-        echo ${{ github.repository_owner }}
-        echo ${{ toJson(needs) }}
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Check results
+        run: |
+          echo ${{ github.repository_owner }}
+          echo ${{ toJson(needs) }}
