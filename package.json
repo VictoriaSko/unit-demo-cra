@@ -36,7 +36,9 @@
         "test": "react-scripts test --watchAll=false",
         "e2e": "playwright test --project=chromium",
         "test-ci": "CI=true npm test -- --reporters=\"default\" --reporters=\"jest-html-reporter\" --reporters=\"jest-teamcity\"",
-        "prepare": "ncc build ./.github/workflows/createIssue/index.js -o ./.github/workflows/createIssue/dist --source-map --license licenses.txt"
+        "prepare-create-issue": "ncc build ./.github/workflows/createIssue/index.js -o ./.github/workflows/createIssue/dist --source-map --license licenses.txt",
+        "prepare-update-issue": "ncc build ./.github/workflows/updateIssue/index.js -o ./.github/workflows/updateIssue/dist --source-map --license licenses.txt",
+        "prepare": "npm run prepare-create-issue | npm run prepare-update-issue"
     },
     "eslintConfig": {
         "extends": [
